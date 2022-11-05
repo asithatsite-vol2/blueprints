@@ -1,0 +1,122 @@
+:init
+clr
+lea r6 :coal
+jmp r6
+
+:getzonedata
+mov out1 r4
+btr r4
+btr [virtual-signal=signal-count]
+fir r1 [virtual-signal=signal-x-tile]
+fir r2 [virtual-signal=signal-y-tile]
+fir r3 [virtual-signal=signal-count]
+fig r7 r5
+bgt r7 0 :nexttile
+jmp :clearzone
+
+:clearzone
+clr out
+mov out1 r1
+mov out2 r2
+mov out3 1[virtual-signal=signal-green]
+slp 5
+dec r4
+teq r4 0
+inc r4
+clr out
+jmp :nexttile
+
+:nexttile
+inc r4
+bgt r4 r3 r6
+jmp :getzonedata
+
+:coal
+mov r4 1[virtual-signal=zone-x-black]
+mov r5 1[item=coal]
+lea r6 :copper
+jmp :getzonedata
+
+:copper
+mov r4 1[virtual-signal=zone-x-orange]
+mov r5 1[item=copper-ore]
+lea r6 :iron
+jmp :getzonedata
+
+:iron
+mov r4 1[virtual-signal=zone-x-cyan]
+mov r5 1[item=iron-ore]
+lea r6 :beryllium
+jmp :getzonedata
+
+:beryllium
+mov r4 1[virtual-signal=zone-x-teal]
+mov r5 1[item=se-beryllium-ore]
+lea r6 :cryonite
+jmp :getzonedata
+
+:cryonite
+mov r4 1[virtual-signal=zone-x-blue]
+mov r5 1[item=se-cryonite]
+lea r6 :holminite
+jmp :getzonedata
+
+:holminite
+mov r4 1[virtual-signal=zone-x-magenta]
+mov r5 1[item=se-holmium-ore]
+lea r6 :iridite
+jmp :getzonedata
+
+:iridite
+mov r4 1[virtual-signal=zone-x-yellow]
+mov r5 1[item=se-iridium-ore]
+lea r6 :methaneice
+jmp :getzonedata
+
+:methaneice
+mov r4 1[virtual-signal=zone-plus-white]
+mov r5 1[item=se-methane-ice]
+lea r6 :naquitite
+jmp :getzonedata
+
+:naquitite
+mov r4 1[virtual-signal=zone-x-purple]
+mov r5 1[item=se-naquium-ore]
+lea r6 :vitamelange
+jmp :getzonedata
+
+:vitamelange
+mov r4 1[virtual-signal=zone-x-olive]
+mov r5 1[item=se-vitamelange]
+lea r6 :vulcanite
+jmp :getzonedata
+
+:vulcanite
+mov r4 1[virtual-signal=zone-x-red]
+mov r5 1[item=se-vulcanite]
+lea r6 :waterice
+jmp :getzonedata
+
+:waterice
+mov r4 1[virtual-signal=zone-plus-cyan]
+mov r5 1[item=se-water-ice]
+lea r6 :stone
+jmp :getzonedata
+
+:stone
+mov r4 1[virtual-signal=zone-x-white]
+mov r5 1[item=stone]
+lea r6 :uranium
+jmp :getzonedata
+
+:uranium
+mov r4 1[virtual-signal=zone-x-green]
+mov r5 1[item=uranium-ore]
+lea r6 :wood
+jmp :getzonedata
+
+:wood
+mov r4 1[virtual-signal=zone-plus-green]
+mov r5 1[item=wood]
+lea r6 :coal
+jmp :getzonedata
