@@ -1,0 +1,115 @@
+:init
+clr
+mov r1 100[virtual-signal=signal-range]
+mov r2 1[virtual-signal=signal-X]
+mov r3 1[virtual-signal=signal-Y]
+mov out1 r2
+mov out2 r3
+:scanx
+clr out3
+clr out4
+clr out5
+add r2 out1 1
+tge r2 r1
+jmp :scany
+mov out1 r2
+jmp :checktile
+:scany
+mov r2 1[virtual-signal=signal-X]
+mov out1 r2
+add r3 out2 1
+tge r3 r1
+mov r3 1[virtual-signal=signal-Y]
+mov out2 r3
+:checktile
+fir r4 [virtual-signal=signal-land]
+ble r4 0 :scanx
+fir r4 [virtual-signal=zone-diagonal-left-orange]
+bgt r4 0 :scanx
+fir r4 [item=coal]
+bgt r4 0 :setcoal
+fir r4 [item=copper-ore]
+bgt r4 0 :setcopper
+fir r4 [item=iron-ore]
+bgt r4 0 :setiron
+fir r4 [item=se-beryllium-ore]
+bgt r4 0 :setberyllium
+fir r4 [item=se-cryonite]
+bgt r4 0 :setcryonite
+fir r4 [item=se-holmium-ore]
+bgt r4 0 :setholminite
+fir r4 [item=se-iridium-ore]
+bgt r4 0 :setiridite
+fir r4 [item=se-methane-ice]
+bgt r4 0 :setmethaneice
+fir r4 [item=se-naquium-ore]
+bgt r4 0 :setnaquitite
+fir r4 [item=se-vitamelange]
+bgt r4 0 :setvitamelange
+fir r4 [item=se-vulcanite]
+bgt r4 0 :setvulcanite
+fir r4 [item=se-water-ice]
+bgt r4 0 :setwaterice
+fir r4 [item=stone]
+bgt r4 0 :setstone
+fir r4 [item=uranium-ore]
+bgt r4 0 :seturanium
+fir r4 [item=wood]
+bgt r4 0 :setwood
+jmp :scanx
+:setzone
+sst r2 [virtual-signal=signal-x-tile]
+sst r3 [virtual-signal=signal-y-tile]
+mov out4 r2
+mov out5 r3
+mov out6 1[virtual-signal=signal-green]
+slp 5
+sst r2 [virtual-signal=signal-X]
+sst r3 [virtual-signal=signal-Y]
+clr out6
+jmp :scanx
+:setcoal
+mov out3 1[virtual-signal=zone-x-black]
+jmp :setzone
+:setcopper
+mov out3 1[virtual-signal=zone-x-orange]
+jmp :setzone
+:setiron
+mov out3 1[virtual-signal=zone-x-cyan]
+jmp :setzone
+:setberyllium
+mov out3 1[virtual-signal=zone-x-teal]
+jmp :setzone
+:setcryonite
+mov out3 1[virtual-signal=zone-x-blue]
+jmp :setzone
+:setholminite
+mov out3 1[virtual-signal=zone-x-magenta]
+jmp :setzone
+:setiridite
+mov out3 1[virtual-signal=zone-x-yellow]
+jmp :setzone
+:setmethaneice
+mov out3 1[virtual-signal=zone-plus-white]
+jmp :setzone
+:setnaquitite
+mov out3 1[virtual-signal=zone-x-purple]
+jmp :setzone
+:setvitamelange
+mov out3 1[virtual-signal=zone-x-olive]
+jmp :setzone
+:setvulcanite
+mov out3 1[virtual-signal=zone-x-red]
+jmp :setzone
+:setwaterice
+mov out3 1[virtual-signal=zone-plus-cyan]
+jmp :setzone
+:setstone
+mov out3 1[virtual-signal=zone-x-white]
+jmp :setzone
+:seturanium
+mov out3 1[virtual-signal=zone-x-green]
+jmp :setzone
+:setwood
+mov out3 1[virtual-signal=zone-plus-green]
+jmp :setzone
